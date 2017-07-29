@@ -4138,6 +4138,9 @@ function revIDESpecialFolderPath pKey
       case "Standalone Settings Definitions"
          return item 1 to -3 of the filename of stack "home" & "/Toolset/resources/supporting_files/standalone_settings"
          break
+      case "Preference Definitions"
+         return item 1 to -3 of the filename of stack "home" & "/Toolset/resources/supporting_files/preferences"
+         break
       case "Tool Definitions"
          return item 1 to -3 of the filename of stack "home" & "/Toolset/resources/supporting_files/tool_definitions"
          break
@@ -4491,7 +4494,7 @@ function revIDEPaletteToStackName pPalette
       case "search"
          return "revSearch"
       case "preferences"
-         return "revPreferencesGUI"
+         return "revPreferencesInspector"
       case "menu builder"
          return "revMenuManager"
       case "extension builder"
@@ -4736,10 +4739,10 @@ command revIDEOpenPalette pPaletteName
       case "standalone settings"
       case "message watcher"
       case "tools"
+      case "preferences"
          palette stack tStackName
          break
       case "search"
-      case "preferences"
       case "project browser"
       case "extension manager"
       case "menu builder"
@@ -8828,9 +8831,12 @@ on revIDEToggleToolbar pWhich
 end revIDEToggleToolbar
 
 on revIDEToggleShowIDEStacksInLists
-   global gREvShowStacks
    lock screen
-   set the hilite of button "show revolution stacks" of card "general" of stack "revPreferencesGUI" to not gREVShowStacks
+   local tPreference
+   global gREvShowStacks
+   put revIDEGetPreference("cShowRevolutionStacks") into tPreference
+   revIDESetPreference "cShowRevolutionStacks", not tPreference
+   put not tPreference into gRevSHowStacks
    
    local tOpenStacks
    put the openStacks into tOpenStacks
@@ -12156,3 +12162,76 @@ on revIDEFindMoreWidgets
          stack revIDEPaletteToStackName("extension manager")
    unlock screen
 end revIDEFindMoreWidgets
+
+command revIDESetEdited pStackName
+   revSetEdited pStackName
+end revIDESetEdited
+
+local sPreferencesInfoA
+constant kPreferencesInfoFilename = "preferencesInfo.txt"
+private command __EnsurePreferencesInfo
+   if sPreferencesInfoA is not empty then
+      exit __EnsurePreferencesInfo
+   end if
+   
+   local tIDEPreferencesPath
+   put revIDESpecialFolderPath("Preference Definitions") into tIDEPreferencesPath
+   
+   local tPreferencesInfoA
+   put __propertyDataFromInfoFile(tIDEPreferencesPath & slash & kPreferencesInfoFilename) \
+         into tPreferencesInfoA
+   
+   put __orderPropArray(__organisePropertyInfo(tPreferencesInfoA), \
+         revIDEPreferencesSections()) into sPreferencesInfoA
+end __EnsurePreferencesInfo
+
+function revIDEPreferencesSections
+   return "General,Files & Memory,Appearance,Mobile Support,Script Editor,Project Browser,Object Sizes,Updates"
+end revIDEPreferencesSections
+
+function revIDEPreferencesInfo
+   __EnsurePreferencesInfo
+   return sPreferencesInfoA
+end revIDEPreferencesInfo
+
+function __revIDEGetPreferences pGroupsA
+   local tPropMappingA, tProp, tPreferencesA
+   repeat for each element tGroup in pGroupsA
+      repeat for each element tPropInfo in tGroup["proplist"]
+         put tGroup["label"] into tPropMappingA[tPropInfo["property_name"]]["group"]
+         put tPropInfo["getter"] into tPropMappingA[tPropInfo["property_name"]]["getter"]
+      end repeat
+   end repeat
+   
+   local tDataA
+   repeat for each key tKey in tPropMappingA
+      if tPropMappingA["getter"] is not empty then
+         dispatch function tPropMappingA["getter"] with tKey
+         put the result into tDataA[tKey]
+      else
+         put revIDEGetPreference(tKey) into tDataA[tKey]
+      end if
+   end repeat
+   
+   local tValue
+   set the itemdelimiter to ":"
+   repeat for each key tKey in tDataA
+      put tDataA[tKey] into tValue
+      put tPropMappingA[tKey]["group"] into tGroup
+      if tPreferencesA[tGroup][tKey] is empty then
+         put pGroupsA[tGroup]["proplist"][tKey] into tPreferencesA[tGroup][tKey]
+      end if
+      put tValue into tPreferencesA[tGroup][tKey]["value"]
+   end repeat
+   return tPreferencesA
+end __revIDEGetPreferences
+
+function revIDEPreferencesOfSection pSection
+   __EnsurePreferencesInfo
+   repeat for each element tElement in sPreferencesInfoA
+      if tElement["label"] is pSection then
+         return __revIDEGetPreferences(tElement["grouplist"])
+      end if
+   end repeat
+   return empty
+end revIDEPreferencesOfSection

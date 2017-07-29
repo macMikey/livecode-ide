@@ -37,10 +37,6 @@ on closeStack
    put false into sInspectorLock
 end closeStack
 
-on resizeStack
-   resizeInspector
-end resizeStack
-
 #####################
 #### PI PROPERTIES #####
 #####################
@@ -297,3 +293,7 @@ end inspectorPropLabelsPrefChanged
 getProp showMultiPropLabels
    return false
 end showMultiPropLabels
+
+function inspectorForObjects
+   return true
+end inspectorForObjects

@@ -1,0 +1,86 @@
+Property : optional getter : optional setter	Label	Section	Editor	User Visible	Read Only	Group	Default	Options	Subsection	min	max	step
+---------------------------------------------------------------------------------------------------------------------
+idePropertyInspector_labels	Property Inspector labels are:	General	com.livecode.pi.enum	true	false		false	Description of option|false,Name of LiveCode property|true
+cShowRevolutionStacks	LiveCode IDE stacks appear in lists	General	com.livecode.pi.boolean	true	false		false			
+cNavigationArrows	Arrows navigate through card	General	com.livecode.pi.boolean	true	false		false
+cREVScriptShortcut	Cmd+Option or Ctrl+Alt edits script	General	com.livecode.pi.boolean	true	false
+cRevPopups	Contextual menus work in LiveCode windows	General	com.livecode.pi.boolean	true	false		false
+cHTTPProxy	HTTP Proxy	General	com.livecode.pi.string	true	false		empty
+cCrashReportStyle	Crash reporting on Windows	General	com.livecode.pi.enum	true	false		Small	None,Small,Medium
+cStartPageShow	Load Start Center on start-up	General	com.livecode.pi.boolean	true	false		true	
+cStartCenterClassic	Show classic start center	General	com.livecode.pi.boolean	true	false		false
+cReloadStartCenter	Load Start Center when last user stack is closed	General	com.livecode.pi.boolean	true	false		false
+
+cAskDestroy	If destroyStack is false, when closing last stack in file:	Files & Memory	com.livecode.pi.enum	true	false		don't remove	Don't close the file|don't remove,Close the file|remove,Ask|ask
+cDestroyStack	destroyStack property is set to true for new stacks	Files & Memory	com.livecode.pi.boolean	true	false		false
+cRevExtension	Add .livecode extension when saving files on MacOS	Files & Memory	com.livecode.pi.boolean	true	false		true
+cNumRecent	Number of recent files to store	Files & Memory	com.livecode.pi.integer	true	false		30			0		1
+cRecentSort	Sort recent files	Files & Memory	com.livecode.pi.enum	true	false		modification date	By date last opened|modification date,Alphabetically|alphabetically
+cImageFileRelative	Always use absolute file paths for images	Files & Memory	com.livecode.pi.boolean	true	false		false
+cCustomizationPath	User extensions	Files & Memory	com.livecode.pi.folder	true	false		execute:get revEnvironmentCustomizationPath()	
+cPreserveStackCreator	Preserve stack creator type	Files & Memory	com.livecode.pi.boolean	true	false		false	
+cPreserveStackVersion	Preserve stack file version on stacks saved in legacy format	Files & Memory	com.livecode.pi.boolean	true	false		false	
+
+cSelectionHandleColor	Selection handle color	Appearance	com.livecode.pi.color	true	false		Gray50	
+cRevRulerMeasurement	Ruler units	Appearance	com.livecode.pi.enum	true	false		pixels	Centimeters|centimeters,Inches|inches,Pixels|pixels
+cGridSize	Grid spacing in pixels	Appearance	com.livecode.pi.integer	true	false		2	
+cRevHelpHiliteColor	Documentation hypertext color	Appearance	com.livecode.pi.color	true	false		
+cBackDropColor	Backdrop color	Appearance	com.livecode.pi.color	true	false		Black	
+cRevTooltipDelay	Display tooltips after (ms)	Appearance	com.livecode.pi.integer	true	false		500	
+
+cButtonWidth	Button width	Object Sizes	com.livecode.pi.integer	true	false	Button size	82			1		1
+cButtonHeight	Button height	Object Sizes	com.livecode.pi.integer	true	false	Button size	23			1		1
+cTabButtonWidth	Tab button width	Object Sizes	com.livecode.pi.integer	true	false	Tab button size	250			1		1
+cTabButtonHeight	Tab button height	Object Sizes	com.livecode.pi.integer	true	false	Tab button size	160			1		1
+cMenuWidth	Menu button width	Object Sizes	com.livecode.pi.integer	true	false	Menu button size	102			1		1
+cMenuHeight	Menu button height	Object Sizes	com.livecode.pi.integer	true	false	Menu button size	22			1		1
+cFieldWidth	Field width	Object Sizes	com.livecode.pi.integer	true	false	Field size	250			1		1
+cFieldHeight	Field height	Object Sizes	com.livecode.pi.integer	true	false	Field size	56			1		1
+cLabelFieldWidth	Label field width	Object Sizes	com.livecode.pi.integer	true	false	Label field size	100			1		1
+cLabelFieldHeight	Label field height	Object Sizes	com.livecode.pi.integer	true	false	Label field size	21			1		1
+cScrollbarWidth	Scrollbar width	Object Sizes	com.livecode.pi.integer	true	false	Scrollbar size	200			1		1
+cScrollbarHeight	Scrollbar height	Object Sizes	com.livecode.pi.integer	true	false	Scrollbar size	16			1		1
+cREVGraphicWidth	Graphic width	Object Sizes	com.livecode.pi.integer	true	false	Graphic size	120			1		1
+cREVGraphicHeight	Graphic height	Object Sizes	com.livecode.pi.integer	true	false	Graphic size	120			1		1
+cREVImageWidth	Image width	Object Sizes	com.livecode.pi.integer	true	false	Image size	120			1		1
+cREVImageHeight	Image height	Object Sizes	com.livecode.pi.integer	true	false	Image size	120			1		1
+cREVPlayerWidth	Player width	Object Sizes	com.livecode.pi.integer	true	false	Player size	155			1		1
+cREVPlayerHeight	Player height	Object Sizes	com.livecode.pi.integer	true	false	Player size	118			1		1
+
+cScriptEditor,editor,font	Font	Script Editor	com.livecode.pi.font	true	false		
+cScriptEditor,editor,fontsize	Size	Script Editor	com.livecode.pi.integer	true	false		12			0		1
+cScriptEditor,print,textsize	Print size	Script Editor	com.livecode.pi.integer	true	false		7			0		1
+cScriptEditor,editor,sorthandlerlist	Order handler list:	Script Editor	com.livecode.pi.enum	true	false		alphabetical	Alphabetically|alphabetical,In order of appearance|Order-by-appearence,By type|By type
+cScriptEditor,colorization,scheme	Colorization scheme	Script Editor	com.livecode.pi.enum	true	false		default	Default|default,Classic|Revolution classic,None|No Colorization
+cScriptEditor,editor,backgroundcolor	Background color	Script Editor	com.livecode.pi.color	true	false		white
+cScriptEditor,editor,debugBackgroundcolor	Background color when debugging	Script Editor	com.livecode.pi.color	true	false		white
+cScriptEditor,usetabs	Scripts open in:	Script Editor	com.livecode.pi.enum	true	false		true	New tab|true,New window|false
+cScriptEditor,editor,tabdepth	Number of indentation spaces	Script Editor	com.livecode.pi.integer	true	false		4			0		1
+cScriptEditor,preserveVariables	Preserve script local variables across compilation	Script Editor	com.livecode.pi.boolean	true	false
+cScriptEditor,explicitVariables	Error when using undeclared variables	Script Editor	com.livecode.pi.boolean	true	false		false
+cScriptEditor,editor,autoformat	Automatically format scripts	Script Editor	com.livecode.pi.boolean	true	false		true
+cScriptEditor,gutter,linenumbers	Show line numbers	Script Editor	com.livecode.pi.boolean	true	false		true
+cScriptEditor,editor,hscrollbar	Show horizontal scrollbar	Script Editor	com.livecode.pi.boolean	true	false		true
+cScriptEditor,editor,useInteractiveFind	Show interactive find	Script Editor	com.livecode.pi.boolean	true	false		false
+cScriptEditor,variables,showglobals	Show globals in variable list	Script Editor	com.livecode.pi.boolean	true	false		false
+cScriptEditor,variables,showenvvars	Show environment variables in variable list	Script Editor	com.livecode.pi.boolean	true	false		false
+cSEHidePalettes	Hide palettes when editing script	Script Editor	com.livecode.pi.boolean	true	false		false	
+cSEHideMessageBox	Hide message box when editing script	Script Editor	com.livecode.pi.boolean	true	false		false	
+cSEHideErrors	Hide errors when editing script	Script Editor	com.livecode.pi.boolean	true	false		false	
+cScriptEditor,editor,commentchar	Comment char	Script Editor	com.livecode.pi.enum	true	false		--	--,#,//
+
+pb_stackSort	Sort stacks by	Project Browser	com.livecode.pi.sort	true	false		name	Name|name,Window order|layer
+pb_cardSort	Sort cards by	Project Browser	com.livecode.pi.sort	true	false		layer	Name|name,Layer|layer
+pb_controlSort	Sort controls by	Project Browser	com.livecode.pi.sort	true	false		layer	Name|name,Layer|layer
+pb_textSize	Text size	Project Browser	com.livecode.pi.integer	true	false		12			0		1
+pb_sections	Show sections	Project Browser	com.livecode.pi.set	true	false		Stacks	Front scripts,Stacks,Back scripts,Stacks in use
+pb_indicator	Object type indicator	Project Browser	com.livecode.pi.enum	true	false		Icon	Icon,Text
+
+cMobileSupport[ios.sdks]	iOS SDKs	Mobile Support	com.livecode.pi.iossdk	true	false	
+cMobileSupport[android.sdk]	Android SDK	Mobile Support	com.livecode.pi.androidsdk	true	false	
+cMobileSupport[android.jdk]	Android JDK	Mobile Support	com.livecode.pi.folder	true	false	
+
+cNotifyMeOfBetaReleases	Notify me of beta releases	Updates	com.livecode.pi.boolean	true	false		true	
+cNotifyMeOfDevelopmentReleases	Notify me of development releases	Updates	com.livecode.pi.boolean	true	false		true	
+cNotifyMeOfMaintainenceReleases	Notify me of maintenance releases	Updates	com.livecode.pi.boolean	true	false		true	
+cNotifyMeOfStableReleases	Notify me of stable releases	Updates	com.livecode.pi.boolean	true	false		true

@@ -1833,7 +1833,7 @@ end revMenubarHelpMenu
 ################################################################################
 
 private function revMenubarViewMenu pContext
-   global gREVPalettes, gREVShowStacks
+   global gREVPalettes
    
    local tView
    put enableMenuItem("Go &First/1", the mode of the topStack is 1) & return after tView
@@ -1842,15 +1842,15 @@ private function revMenubarViewMenu pContext
    put enableMenuItem("Go &Last/4", the mode of the topStack is 1) & return after tView
    put enableMenuItem("Go Recent/5", the mode of the topStack is 1) & return after tView
    put "-" & return after tView
-   put toggleMenuItem("Toolbar Text", the cToolbarText of stack "revPreferences") & return after tView
-   put toggleMenuItem("Toolbar Icons", the cToolbarIcons of stack "revPreferences") & return after tView
+   put toggleMenuItem("Toolbar Text", revIDEGetPreference("cToolbarText")) & return after tView
+   put toggleMenuItem("Toolbar Icons", revIDEGetPreference("cToolbarIcons")) & return after tView
    put "-" & return after tView
    put toggleMenuItem("Palettes", gREVPalettes is empty) & return after tView
    put "-" & return after tView
    put toggleMenuItem("Rulers", the mode of stack "revRulersH" is not 0) & return after tView
    put toggleMenuItem("Grid", the grid) & return after tView
    put toggleMenuItem("Backdrop", the backdrop is not "none") & return after tView
-   put toggleMenuItem("Show IDE Stacks In Lists", gREVShowStacks) & return after tView
+   put toggleMenuItem("Show IDE Stacks In Lists", revIDEGetPreference("cShowRevolutionStacks")) & return after tView
    put "-" & return after tView
    put toggleMenuItem("Show &Invisible Objects" , the showInvisibles) & return after tView
    
