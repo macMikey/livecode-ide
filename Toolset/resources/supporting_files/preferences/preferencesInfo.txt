@@ -84,3 +84,132 @@ cNotifyMeOfBetaReleases	Notify me of beta releases	Updates	com.livecode.pi.boole
 cNotifyMeOfDevelopmentReleases	Notify me of development releases	Updates	com.livecode.pi.boolean	true	false		true	
 cNotifyMeOfMaintainenceReleases	Notify me of maintenance releases	Updates	com.livecode.pi.boolean	true	false		true	
 cNotifyMeOfStableReleases	Notify me of stable releases	Updates	com.livecode.pi.boolean	true	false		true
+
+# The following do not appear in the current prefs GUI
+revHelpListMethod		Other		false			filtering
+cREVMsgTabRectGlobalProperties		Other		false			417,113
+cShowProfileEditor		Other		false			true
+cREVMsgShowUIMessages		Other		false			false
+tooltip delay		Other		false			500
+cREVMsgShowUIBackScripts		Other		false			false
+cREVMsgTabRectSingle Line		Other		false			417,72
+cREVGeoTopLeft		Other		false			539,432
+cREVDBCode		Other		false			70378
+cREVScriptHeight		Other		false			276
+cVariableWatcherRect		Other		false			483,214,1015,476
+cShowrevProps		Other		false			false
+cMacOSScrollbarWidth		Other		false			100
+cControlTabs		Other		false			1,2,3,4,5,7
+cGoAlign		Other		false			true
+cREVRotatePrev2		Other		false			0
+cREVPropertyPaletteTopLeft		Other		false			993,712
+cLiveColor		Other		false			true
+cDocsFirstRun		Other		false			true
+cUpdate,MaxAutoPopupFrequency		Other		false			86400
+cREVMsgTabRectcard id 1147		Other		false			417,72
+cAppearanceTopLeft		Other		false			468,131
+cREVDefaultMenubar		Other		false			false
+cREVMsgTabRectbackScripts		Other		false			417,113
+cGrid		Other		false			true
+cShowAsHandlers		Other		false			false
+revDocsAlreadySeen		Other		false			false
+cREVProfileReadOnlyWarning		Other		false			true
+cCardTabs		Other		false			6,7,9
+cMacOSScrollbarHeight		Other		false			16
+cFirstRun		Other		false			true
+cMacOSProgressScrollbarHeight		Other		false			14
+suppressedMessages		Other		false			mouseMove
+cAutoFormat		Other		false			true
+cRevDocsRect		Other		false			1067,251,1882,827
+cREVMsgShowUIFrontScripts		Other		false			false
+revstack		Other		false			false
+cMacOSProgressScrollbarWidth		Other		false			100
+cREVUIScriptShortcut		Other		false			false
+cREVMenuBarTopLeft		Other		false			60,27
+cREVFieldFirstTabHeight		Other		false			322
+cTraceDelay		Other		false			500
+cREVRotatePrev1		Other		false			0
+cToolbarIcons		Other		false			true
+cShowAudioclipsclips		Other		false			true
+cAudioclipTabs		Other		false			1,2,3,4,5
+cREVMsgTabRectSingleLine		Other		false			620,235
+revHelpDefaultSection		Other		false			Sections List
+cCaseSensitive		Other		false			false
+cLargeFonts		Other		false			auto
+yellow		Other		false			Yellow
+cREVMsgTabRectGlobalVariables		Other		false			417,113
+cREVMsgTabRectpendingMessages		Other		false			417,113
+cABCommandDoubleClick		Other		false			Property Inspector
+cREVTipNumber		Other		false			1
+cREVMsgTabRectstacksInUse		Other		false			417,113
+cBuiltInColors		Other		false			blue,brown,darkorange,red
+cSelectionHandle		Other		false			Gray50
+cREVMaximizedScriptEditorTopLeft		Other		false			128,103
+suppressIDE		Other		false			true
+cREVRotatePrev5		Other		false			45
+cABOptionDoubleClick		Other		false			Property Inspector
+cPaletteTopLeft		Other		false			170,131
+cNOPICTWarning		Other		false			false
+cREVMsgTopLeft		Other		false			470,460
+cRevDocsCurrentCard		Other		false			Dictionary
+cREVScriptWidth		Other		false			385
+cREVUnmaximizedScriptWidth		Other		false			487
+cREVDontMaximizeScriptEditor		Other		false			false
+cREVToolsPaintToolsVisible		Other		false			true
+cDontWrap		Other		false			true
+cVariableChecking		Other		false			false
+cAppBrowserWidgetLeft		Other		false			302
+cUngroupWarning		Other		false			true
+resizeable		Other		false			false
+cMessageWatcherRect		Other		false			457,430,853,680
+cREVMsgTabRectrevbasic		Other		false			287,261
+cSort		Other		false			true
+cREVMsgAutoRefresh		Other		false			false
+cVariablePreservation		Other		false			true
+cREVMsgShowUIVariables		Other		false			false
+cHandlerList		Other		false			false
+red		Other		false			red
+cREVMsgIntelligenceObject		Other		false			selectedObject
+cBackDrop		Other		false			none
+cREVUnmaximizedScriptHeight		Other		false			300
+cToolsTopLeft		Other		false			13,125
+cCommentCharacter		Other		false			--
+cScriptEditorRect		Other		false			97,92,657,440
+cREVRotatePrev4		Other		false			11
+cREVSaveStacksAfterMoving		Other		false			false
+cREVMsgTabRectrevscript		Other		false			530,564
+cAppBrowserRect		Other		false			146,123,800,408
+cREVAutoCreateProfilesWarning		Other		false			true
+cREVAutoCreateProfiles		Other		false			false
+cREVMsgTabRectGlobal Variables		Other		false			417,113
+cShowVideoclips		Other		false			true
+cWholeMatches		Other		false			false
+cVerboseDebug		Other		false			false
+cREVMsgTabRectMultipleLines		Other		false			417,99
+cBreakPoints		Other		false			true
+cREVGeoOpen		Other		false			false
+cREVAOTopLeft		Other		false			462,120
+cCustomColorsList		Other		false			blackgreen
+revHelpUnixReligion		Other		false			Penguin
+cSelectGrouped		Other		false			false
+cVideoclipTabs		Other		false			1,2,3,4,5
+cREVMacOSMenubar		Other		false			true
+cREVProfileReadOnly		Other		false			false
+cToolbarText		Other		false			true
+revHelpHiliteColor		Other		false			Yellow
+cREVScriptDebugMode		Other		false			true
+cREVMsgTabRectMultiple Lines		Other		false			417,99
+Num Recent Files		Other		false			30
+cREVProfileEditorTopLeft		Other		false			568,259
+cREVMsgTabRectfrontScripts		Other		false			417,113
+cREVRotatePrev3		Other		false			11
+cREVButtonSecondTabHeight		Other		false			338
+cREVHelpText		Other		false			true
+cREVMsgTabRectrevstack		Other		false			287,261
+cREVMsgTabRectGlobal Properties		Other		false			417,113
+cShowAudioclipclips		Other		false			true
+cREVDBName		Other		false			revolutionli
+cDocsQuickLinksVisible		Other		false			true
+cREVErrorsPaletteExpandedHeight		Other		false			278
+cShowAudioclips		Other		false			true
+
