@@ -1492,6 +1492,8 @@ function __unescapeString pString
 end __unescapeString
 
 on revIDEInitialiseIDELibrary
+   revIDEInitialisePreferences
+   
    # Load fonts
    start using font file (revIDESpecialFolderPath("fonts") & slash & "lcideicons.ttf")
    start using font file (revIDESpecialFolderPath("fonts") & slash & "fontawesome.ttf")
@@ -12167,7 +12169,7 @@ command revIDESetEdited pStackName
    revSetEdited pStackName
 end revIDESetEdited
 
-local sPreferencesInfoA
+local sPreferencesInfoA, sPreferencesA
 constant kPreferencesInfoFilename = "preferencesInfo.txt"
 private command __EnsurePreferencesInfo
    if sPreferencesInfoA is not empty then
@@ -12177,11 +12179,10 @@ private command __EnsurePreferencesInfo
    local tIDEPreferencesPath
    put revIDESpecialFolderPath("Preference Definitions") into tIDEPreferencesPath
    
-   local tPreferencesInfoA
    put __propertyDataFromInfoFile(tIDEPreferencesPath & slash & kPreferencesInfoFilename) \
-         into tPreferencesInfoA
+         into sPreferencesA
    
-   put __orderPropArray(__organisePropertyInfo(tPreferencesInfoA), \
+   put __orderPropArray(__organisePropertyInfo(sPreferencesA), \
          revIDEPreferencesSections()) into sPreferencesInfoA
 end __EnsurePreferencesInfo
 
@@ -12235,3 +12236,23 @@ function revIDEPreferencesOfSection pSection
    end repeat
    return empty
 end revIDEPreferencesOfSection
+
+command revIDEInitialisePreferences
+   __EnsurePreferencesInfo
+   // Find unset prefs
+   local tPrefs
+   put the customKeys of stack "revPreferences" into tPrefs
+   split tPrefs by return
+   
+   local tToSet
+   put sPreferencesA into tToSet
+   difference tToSet with tPrefs
+   
+   repeat for each key tKey in tToSet
+      if sPreferencesA[tKey]["setter"] is not empty then
+         dispatch sPreferencesA[tKey]["setter"] with tKey, sPreferencesA[tKey]["default"]
+      else
+         revIDESetPreference tKey, sPreferencesA[tKey]["default"]
+      end if
+   end repeat
+end revIDEInitialisePreferences
