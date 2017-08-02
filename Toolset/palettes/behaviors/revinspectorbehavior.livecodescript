@@ -1,5 +1,5 @@
 ﻿script "revInspectorBehavior"
-constant kMaxLabelSize = 200
+constant kMaxLabelSize = 300
 
 # The inspector data
 local sDataA

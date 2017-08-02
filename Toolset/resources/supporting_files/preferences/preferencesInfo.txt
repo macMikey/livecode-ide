@@ -76,6 +76,22 @@ pb_textSize	Text size	Project Browser	com.livecode.pi.integer	true	false		12			0
 pb_sections	Show sections	Project Browser	com.livecode.pi.set	true	false		Stacks	Front scripts,Stacks,Back scripts,Stacks in use
 pb_indicator	Object type indicator	Project Browser	com.livecode.pi.enum	true	false		Icon	Icon,Text
 
+cABDoubleClick[stacks]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Stack double-click actions	Toplevel	Property Inspector,Edit Script,Toplevel
+cABCommandDoubleClick[stacks]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Stack double-click actions	Edit Script	Property Inspector,Edit Script,Toplevel
+cABOptionDoubleClick[stacks]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Stack double-click actions	Property Inspector	Property Inspector,Edit Script,Toplevel
+cABDoubleClick[cards]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Card double-click actions	Go	Property Inspector,Edit Script,Go
+cABCommandDoubleClick[cards]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Card double-click actions	Edit Script	Property Inspector,Edit Script,Go
+cABOptionDoubleClick[cards]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Card double-click actions	Property Inspector	Property Inspector,Edit Script,Go
+cABDoubleClick[controls]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Control double-click actions	Property Inspector	Property Inspector,Edit Script
+cABCommandDoubleClick[controls]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Control double-click actions	Edit Script	Property Inspector,Edit Script
+cABOptionDoubleClick[controls]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Control double-click actions	Property Inspector	Property Inspector,Edit Script
+cABDoubleClick[videoclips]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Videoclip double-click actions	Play	Property Inspector,Edit Script,Play
+cABCommandDoubleClick[videoclips]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Videoclip double-click actions	Edit Script	Property Inspector,Edit Script,Play
+cABOptionDoubleClick[videoclips]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Videoclip double-click actions	Property Inspector	Property Inspector,Edit Script,Play
+cABDoubleClick[audioclips]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Audioclip double-click actions	Play	Property Inspector,Edit Script,Play
+cABCommandDoubleClick[audioclips]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Audioclip double-click actions	Edit Script	Property Inspector,Edit Script,Play
+cABOptionDoubleClick[audioclips]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Audioclip double-click actions	Property Inspector	Property Inspector,Edit Script,Play
+
 cMobileSupport[ios.sdks]	iOS SDKs	Mobile Support	com.livecode.pi.iossdk	true	false	
 cMobileSupport[android.sdk]	Android SDK	Mobile Support	com.livecode.pi.androidsdk	true	false	
 cMobileSupport[android.jdk]	Android JDK	Mobile Support	com.livecode.pi.folder	true	false	

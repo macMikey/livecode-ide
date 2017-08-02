@@ -55,7 +55,7 @@ on inspectorAddActions
 end inspectorAddActions
 
 getProp showMultiPropLabels
-   return false
+   return true
 end showMultiPropLabels
 
 function inspectorForObjects

@@ -12187,7 +12187,7 @@ private command __EnsurePreferencesInfo
 end __EnsurePreferencesInfo
 
 function revIDEPreferencesSections
-   return "General,Files & Memory,Appearance,Mobile Support,Script Editor,Project Browser,Object Sizes,Updates"
+   return "General,Files & Memory,Appearance,Mobile Support,Script Editor,Project Browser,Application Browser,Object Sizes,Updates"
 end revIDEPreferencesSections
 
 function revIDEPreferencesInfo
@@ -12256,3 +12256,9 @@ command revIDEInitialisePreferences
       end if
    end repeat
 end revIDEInitialisePreferences
+
+command revIDEResetPreferences
+   set the customKeys of stack "revPreferences" to empty
+   set the customPropertySets of stack "revPreferences" to empty
+   revIDEInitialisePreferences
+end revIDEResetPreferences
