@@ -76,21 +76,26 @@ pb_textSize	Text size	Project Browser	com.livecode.pi.integer	true	false		12			0
 pb_sections	Show sections	Project Browser	com.livecode.pi.set	true	false		Stacks	Front scripts,Stacks,Back scripts,Stacks in use
 pb_indicator	Object type indicator	Project Browser	com.livecode.pi.enum	true	false		Icon	Icon,Text
 
-cABDoubleClick[stacks]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Stack double-click actions	Toplevel	Property Inspector,Edit Script,Toplevel
-cABCommandDoubleClick[stacks]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Stack double-click actions	Edit Script	Property Inspector,Edit Script,Toplevel
-cABOptionDoubleClick[stacks]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Stack double-click actions	Property Inspector	Property Inspector,Edit Script,Toplevel
-cABDoubleClick[cards]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Card double-click actions	Go	Property Inspector,Edit Script,Go
-cABCommandDoubleClick[cards]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Card double-click actions	Edit Script	Property Inspector,Edit Script,Go
-cABOptionDoubleClick[cards]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Card double-click actions	Property Inspector	Property Inspector,Edit Script,Go
-cABDoubleClick[controls]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Control double-click actions	Property Inspector	Property Inspector,Edit Script
-cABCommandDoubleClick[controls]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Control double-click actions	Edit Script	Property Inspector,Edit Script
-cABOptionDoubleClick[controls]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Control double-click actions	Property Inspector	Property Inspector,Edit Script
-cABDoubleClick[videoclips]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Videoclip double-click actions	Play	Property Inspector,Edit Script,Play
-cABCommandDoubleClick[videoclips]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Videoclip double-click actions	Edit Script	Property Inspector,Edit Script,Play
-cABOptionDoubleClick[videoclips]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Videoclip double-click actions	Property Inspector	Property Inspector,Edit Script,Play
-cABDoubleClick[audioclips]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Audioclip double-click actions	Play	Property Inspector,Edit Script,Play
-cABCommandDoubleClick[audioclips]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Audioclip double-click actions	Edit Script	Property Inspector,Edit Script,Play
-cABOptionDoubleClick[audioclips]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Audioclip double-click actions	Property Inspector	Property Inspector,Edit Script,Play
+Double-click		Application Browser	com.livecode.pi.string	true	true	Double-click actions	Double-click
+Command + double-click		Application Browser	com.livecode.pi.string	true	true	Double-click actions	Command + double-click
+Option + double-click		Application Browser	com.livecode.pi.string	true	true	Double-click actions	Option + double-click
+cABDoubleClick[stacks]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Stacks	Toplevel	Property Inspector,Edit Script,Toplevel
+cABCommandDoubleClick[stacks]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Stacks	Edit Script	Property Inspector,Edit Script,Toplevel
+cABOptionDoubleClick[stacks]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Stacks	Property Inspector	Property Inspector,Edit Script,Toplevel
+cABDoubleClick[cards]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Cards	Go	Property Inspector,Edit Script,Go
+cABCommandDoubleClick[cards]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Cards	Edit Script	Property Inspector,Edit Script,Go
+cABOptionDoubleClick[cards]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Cards	Property Inspector	Property Inspector,Edit Script,Go
+cABDoubleClick[controls]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Controls	Property Inspector	Property Inspector,Edit Script
+cABCommandDoubleClick[controls]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Controls	Edit Script	Property Inspector,Edit Script
+cABOptionDoubleClick[controls]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Controls	Property Inspector	Property Inspector,Edit Script
+cABDoubleClick[videoclips]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Videoclips	Play	Property Inspector,Edit Script,Play
+cABCommandDoubleClick[videoclips]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Videoclips	Edit Script	Property Inspector,Edit Script,Play
+cABOptionDoubleClick[videoclips]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Videoclips	Property Inspector	Property Inspector,Edit Script,Play
+cABDoubleClick[audioclips]	Double-click	Application Browser	com.livecode.pi.enum	true	false	Audioclips	Play	Property Inspector,Edit Script,Play
+cABCommandDoubleClick[audioclips]	Command double-click	Application Browser	com.livecode.pi.enum	true	false	Audioclips	Edit Script	Property Inspector,Edit Script,Play
+cABOptionDoubleClick[audioclips]	Option double-click	Application Browser	com.livecode.pi.enum	true	false	Audioclips	Property Inspector	Property Inspector,Edit Script,Play
+cShowAudioclips	Show audio clips	Application Browser	com.livecode.pi.boolean	true	false		true
+cShowVideoclips	Show video clips	Application Browser	com.livecode.pi.boolean	true	false		true
 
 cMobileSupport[ios.sdks]	iOS SDKs	Mobile Support	com.livecode.pi.iossdk	true	false	
 cMobileSupport[android.sdk]	Android SDK	Mobile Support	com.livecode.pi.androidsdk	true	false	
@@ -198,7 +203,6 @@ cAppBrowserRect		Other		false			146,123,800,408
 cREVAutoCreateProfilesWarning		Other		false			true
 cREVAutoCreateProfiles		Other		false			false
 cREVMsgTabRectGlobal Variables		Other		false			417,113
-cShowVideoclips		Other		false			true
 cWholeMatches		Other		false			false
 cVerboseDebug		Other		false			false
 cREVMsgTabRectMultipleLines		Other		false			417,99
@@ -227,5 +231,4 @@ cShowAudioclipclips		Other		false			true
 cREVDBName		Other		false			revolutionli
 cDocsQuickLinksVisible		Other		false			true
 cREVErrorsPaletteExpandedHeight		Other		false			278
-cShowAudioclips		Other		false			true
 

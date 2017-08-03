@@ -354,7 +354,7 @@ local sPrefs
 #   This is called when the Revolution preferences are reset.
 command revSEReloadPreferences
    delete variable sPrefs
-   sePrefInit
+   sePrefInit true
 end revSEReloadPreferences
 
 local sObjectCallbacks
@@ -410,6 +410,9 @@ end sePrefGet
 #   Sets a script editor preference
 command sePrefSet pTag, pValue
    put pValue into sPrefs[pTag]
+   local tPropName
+   put "cScriptEditor," & pTag into tPropname
+   revIDESetPreference tPropName, pValue
 end sePrefSet
 
 # Parameters
@@ -426,7 +429,12 @@ end sePrefList
 
 # Description
 #   Initialises the script editor preferences system.
-command sePrefInit
+local sPrefsInited
+command sePrefInit pForce
+   if sPrefsInited and not pForce then
+      exit sePrefInit
+   end if
+   
    # Get the default preferences, which are returned in an array.
    local tPrefs
    sePrefGetDefaults
@@ -465,16 +473,7 @@ end sePrefInit
 # Description
 #   Saves the current script editor preferences in the Revolution preferences stack.
 command sePrefSave
-   local tDefaults
-   sePrefGetDefaults
-   put the result into tDefaults
-   
-   local tPropname
-   repeat for each key tKey in sPrefs
-      put "cScriptEditor," & tKey into tPropname
-      
-      revIDESetPreference tPropName, sPrefs[tKey]
-   end repeat
+   -- Don't need this anymore
 end sePrefSave
 
 command log pMessage
@@ -1033,6 +1032,7 @@ command revSEColorizeField pField, pStart, pEnd
    end if
    
    sePrefInit
+   
    local tConfig
    put sePrefGet("colorization,config") into tConfig
    

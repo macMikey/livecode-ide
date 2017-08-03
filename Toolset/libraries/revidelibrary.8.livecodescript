@@ -1742,23 +1742,34 @@ on ideMessageSendWithParameters pMessage, pTriggeringObjects, pParamsArray
    # Add all universal subscribers to the subscription list
    put sSubscriptions[pMessage]["callback targets"] into tSubscriptionList
    
+   # Allow generic subscription to parameterized msgs such as "idePreferenceChanged"
+   set the itemdel to ":"
+   local tMessage, tGenericSubscriptions
+   put item 1 of pMessage into tMessage
+   put sSubscriptions[tMessage]["callback targets"] into tGenericSubscriptions
+   if tGenericSubscriptions is not empty then
+      if tSubscriptionList is empty then
+         put tGenericSubscriptions into tSubscriptionList
+      else
+         put return & tGenericSubscriptions after tSubscriptionList
+      end if
+   end if
+   
    # Add any per-object subscriptions
+   local tPerObjectSubscriptions
    repeat for each line tLine in pTriggeringObjects
       put pMessage & "," & tLine into tSubscription
-      repeat for each line tTarget in sSubscriptions[tSubscription]["callback targets"]
+      put sSubscriptions[tSubscription]["callback targets"] into tPerObjectSubscriptions
+      if tPerObjectSubscriptions is not empty then
          if tSubscriptionList is empty then
-            put tTarget into tSubscriptionList
+            put tPerObjectSubscriptions into tSubscriptionList
          else
-            put return & tTarget after tSubscriptionList
+            put return & tPerObjectSubscriptions after tSubscriptionList
          end if
-      end repeat
+      end if
    end repeat
    
    # Send the message!
-   set the itemdel to ":"
-   local tMessage
-   put item 1 of pMessage into tMessage
-   
    # Construct a dispatch command with all the desired parameters
    local tDoString, tParams, tErrors
    put "dispatch tMessage to tObjectID" into tDoString
@@ -8858,7 +8869,6 @@ on revIDEToggleShowIDEStacksInLists
          put true into tBringToFront
       end if
    end if
-   send "revToggleShowStacks" to button "show revolution stacks" of card "general" of stack "revPreferencesGUI"
    unlock screen
    
    if tBringToFront then
@@ -12237,6 +12247,16 @@ function revIDEPreferencesOfSection pSection
    return empty
 end revIDEPreferencesOfSection
 
+private command __InitialisePreferences pToInitA
+   repeat for each key tKey in pToInitA
+      if sPreferencesA[tKey]["setter"] is not empty then
+         dispatch sPreferencesA[tKey]["setter"] with tKey, sPreferencesA[tKey]["default"]
+      else
+         revIDESetPreference tKey, sPreferencesA[tKey]["default"]
+      end if
+   end repeat
+end __InitialisePreferences
+
 command revIDEInitialisePreferences
    __EnsurePreferencesInfo
    // Find unset prefs
@@ -12248,17 +12268,22 @@ command revIDEInitialisePreferences
    put sPreferencesA into tToSet
    difference tToSet with tPrefs
    
-   repeat for each key tKey in tToSet
-      if sPreferencesA[tKey]["setter"] is not empty then
-         dispatch sPreferencesA[tKey]["setter"] with tKey, sPreferencesA[tKey]["default"]
-      else
-         revIDESetPreference tKey, sPreferencesA[tKey]["default"]
-      end if
-   end repeat
+   __InitialisePreferences tToSet
 end revIDEInitialisePreferences
 
-command revIDEResetPreferences
+command revIDEPreferencesResetAll
    set the customKeys of stack "revPreferences" to empty
    set the customPropertySets of stack "revPreferences" to empty
    revIDEInitialisePreferences
-end revIDEResetPreferences
+end revIDEPreferencesResetAll
+
+command revIDEPreferencesResetSection pSection
+   local tPrefs, tToReset
+   put revIDEPreferencesOfSection(pSection) into tPrefs
+   repeat for each element tGroup in tPrefs
+      repeat for each key tPrefName in tGroup
+         put true into tToReset[tPrefName]
+      end repeat
+   end repeat
+   __InitialisePreferences tToReset
+end revIDEPreferencesResetSection
