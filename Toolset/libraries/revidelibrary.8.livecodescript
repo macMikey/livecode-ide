@@ -8773,14 +8773,6 @@ on revIDEToggle pProperty
          end if
          put "selectionMode" into tToggleMessage
          break
-      case "Script Debug Mode"
-         revIDESetPreference "cREVScriptDebugMode", not revIDEGetPreference("cREVScriptDebugMode")
-         put "scriptDebugMode" into tToggleMessage
-         break
-      case "Show IDE Stacks In Lists"
-         put "ideStacksInLists" into tToggleMessage
-         revIDEToggleShowIDEStacksInLists
-         break
       case "Show Invisible Objects"
          put "showInvisibles" into tToggleMessage
          set the showInvisibles to not (the showInvisibles)
@@ -8802,35 +8794,18 @@ on revIDEToggle pProperty
             end if
             unlock messages
          end if
-         break
-      case "Backdrop"
-         if the backDrop is "none" then
-            if revIDEGetPreference("cBackDropColor") is empty then 
-               revIDESetPreference "cBackDropColor", "black"
-            end if
-            set the backDrop to revIDEGetPreference("cBackDropColor")
-            revIDESetPreference "cBackDrop", the backDrop
-         else
-            set the backDrop to "none"
-            revIDESetPreference "cBackDrop", "none"
-         end if
-         # No need to send toggle message as idePreferenceChanged will be sent
-         exit revIDEToggle
-      case "Grid"
-         if the grid is false then
-            set the grid to true
-            revIDESetPreference "cGrid", true
-         else
-            set the grid to false
-            revIDESetPreference "cGrid", false
-         end if
-         # No need to send toggle message as idePreferenceChanged will be sent
-         exit revIDEToggle
+         break      
    end switch
    # Invisible objects
    # Ruler
    ideMessageSend "ideToggleChanged:" & tToggleMessage
 end revIDEToggle
+
+command revIDETogglePreference pPreference
+   local tValue
+   put revIDEGetPreference(pPreference) into tValue
+   revIDESetPreference pPreference, not tValue
+end revIDETogglePreference
 
 on revIDEToggleToolbar pWhich
    local tCurrentPref
@@ -8842,49 +8817,6 @@ on revIDEToggleToolbar pWhich
       revIDESetPreference "cToolbarIcons", not tCurrentPref
    end if
 end revIDEToggleToolbar
-
-on revIDEToggleShowIDEStacksInLists
-   lock screen
-   local tPreference
-   global gREvShowStacks
-   put revIDEGetPreference("cShowRevolutionStacks") into tPreference
-   revIDESetPreference "cShowRevolutionStacks", not tPreference
-   put not tPreference into gRevSHowStacks
-   
-   local tOpenStacks
-   put the openStacks into tOpenStacks
-   
-   local tFrontStack
-   put empty into tFrontStack
-   repeat for each line tStack in tOpenStacks
-      if tStack is not "revMenubar" and the mode of stack tStack is among the items of "1,2,3" then
-         put tStack into tFrontStack
-         exit repeat
-      end if
-   end repeat
-   if tFrontStack is not empty then
-      set the wholeMatches to true
-      local tBringToFront
-      if lineOffset(tFrontStack, tOpenStacks) < lineOffset("revApplicationOverview", tOpenStacks) then
-         put true into tBringToFront
-      end if
-   end if
-   unlock screen
-   
-   if tBringToFront then
-      lock messages
-      switch the mode of stack tFrontStack
-         case 1
-         case 2
-            toplevel tFrontStack
-            break
-         case 3
-            modeless tFrontStack
-            break
-      end switch
-      unlock messages 
-   end if
-end revIDEToggleShowIDEStacksInLists
 
 on revIDETogglePalette pPaletteName
    local tStackName
@@ -12258,7 +12190,10 @@ private command __InitialisePreferences pToInitA
 end __InitialisePreferences
 
 command revIDEInitialisePreferences
-   __EnsurePreferencesInfo
+   __EnsurePreferencesInfo   
+   
+   ideSubscribe "idePreferenceChanged"
+   
    // Find unset prefs
    local tPrefs
    put the customKeys of stack "revPreferences" into tPrefs
@@ -12269,12 +12204,17 @@ command revIDEInitialisePreferences
    difference tToSet with tPrefs
    
    __InitialisePreferences tToSet
+   
+   // Ensure all globals are set as necessary
+   repeat for each key tKey in tPrefs
+      revIDESetPreference tKey, revIDEGetPreference(tKey)
+   end repeat
 end revIDEInitialisePreferences
 
 command revIDEPreferencesResetAll
    set the customKeys of stack "revPreferences" to empty
    set the customPropertySets of stack "revPreferences" to empty
-   revIDEInitialisePreferences
+   __InitialisePreferences sPreferencesA
 end revIDEPreferencesResetAll
 
 command revIDEPreferencesResetSection pSection
@@ -12287,3 +12227,98 @@ command revIDEPreferencesResetSection pSection
    end repeat
    __InitialisePreferences tToReset
 end revIDEPreferencesResetSection
+
+on idePreferenceChanged pPreference
+   -- Ensure assoicated state is updated for relevant preferences
+   switch pPreference
+      // Preferences governing global properties
+      case "cBackDrop"
+         local tValue
+         put revIDEGetPreference(pPreference) into tValue
+         if tValue then
+            set the backDrop to revIDEGetPreference("cBackDropColor")
+         else
+            set the backDrop to "none"
+         end if
+         break
+      case "cBackDropColor"
+         if the backDrop is not "none" then
+            set the backdrop to revIDEGetPreference(pPreference)
+         end if
+         break
+      case "cGrid"
+         set the grid to revIDEGetPreference(pPreference)
+         break
+      case "cHTTPProxy"
+         set the httpProxy to revIDEGetPreference(pPreference)
+         break
+      case "cSelectGrouped"
+         set the selectGroupedControls to revIDEGetPreference(pPreference)
+         break
+      case "cREVToolTipDelay"
+         set the tooltipDelay to revIDEGetPreference(pPreference)
+         break
+      case "cREVScriptFont"
+         set the scriptTextFont to revIDEGetPreference(pPreference)
+         break
+      case "cREVScriptSize"
+         set the scriptTextSize to revIDEGetPreference(pPreference)
+         break
+      case "cGridSize"
+         set the gridSize to revIDEGetPreference(pPreference)
+         break
+      case "cSelectionHandleColor"
+         set the selectionHandleColor to revIDEGetPreference(pPreference)
+         break
+      case "cNavigationArrows"
+         set the navigationArrows to revIDEGetPreference(pPreference)
+         break
+      case "cGridSize"
+         set the gridSize to revIDEGetPreference(pPreference)
+         break
+      case "cTraceDelay"
+         set the traceDelay to revIDEGetPreference(pPreference)
+         break
+         // Preferences governing global variables
+      case "idePropertyInspector_labels"
+         global gRevLanguageNames
+         put revIDEGetPreference(pPreference) into gRevLanguageNames
+         break
+      case "cRevPopups"
+         global gREVPopups
+         put revIDEGetPreference(pPreference) into gREVPopups
+         break
+      case "cAutoFormat"
+         global gREVAutoFormat
+         put revIDEGetPreference(pPreference) into gREVAutoFormat
+         break
+      case "cREVUIScriptShortcut"
+         global gREVUIScriptShortcut
+         put revIDEGetPreference(pPreference) into gREVUIScriptShortcut
+         break      
+      case "cREVScriptShortcut"
+         global gREVScriptShortcut
+         put revIDEGetPreference(pPreference) into gREVScriptShortcut
+         break
+      case "cCommentCharacter"
+         global gREVCommentCharacter
+         put revIDEGetPreference(pPreference) into gREVCommentCharacter
+         break
+      case "cREVTemplateMasterName"
+         global gREVTemplateMasterName
+         put revIDEGetPreference(pPreference) into gREVTemplateMasterName
+         break
+      case "cREVAutoCreateProfiles"
+         global gREVAutoCreateProfiles
+         put revIDEGetPreference(pPreference) into gREVAutoCreateProfiles
+         break
+      case "cREVProfileReadOnly"
+         global gREVProfileReadOnly
+         put revIDEGetPreference(pPreference) into gREVProfileReadOnly
+         break
+      case "cShowRevolutionStacks"
+         global gRevShowStacks
+         put revIDEGetPreference(pPreference) into gRevShowStacks
+         break
+   end switch
+end idePreferenceChanged

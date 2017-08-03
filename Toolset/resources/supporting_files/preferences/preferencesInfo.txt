@@ -5,7 +5,7 @@ cShowRevolutionStacks	LiveCode IDE stacks appear in lists	General	com.livecode.p
 cNavigationArrows	Arrows navigate through card	General	com.livecode.pi.boolean	true	false		false
 cREVScriptShortcut	Cmd+Option or Ctrl+Alt edits script	General	com.livecode.pi.boolean	true	false
 cRevPopups	Contextual menus work in LiveCode windows	General	com.livecode.pi.boolean	true	false		false
-cHTTPProxy	HTTP Proxy	General	com.livecode.pi.string	true	false		empty
+cHTTPProxy	HTTP Proxy	General	com.livecode.pi.string	true	false		
 cCrashReportStyle	Crash reporting on Windows	General	com.livecode.pi.enum	true	false		Small	None,Small,Medium
 cStartPageShow	Load Start Center on start-up	General	com.livecode.pi.boolean	true	false		true	
 cStartCenterClassic	Show classic start center	General	com.livecode.pi.boolean	true	false		false

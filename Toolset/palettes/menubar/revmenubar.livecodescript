@@ -2986,6 +2986,8 @@ on revMenubarDevelopmentMenuPick pWhich
          revIDEActionClearAllBreakpoints
          break
       case "Script Debug Mode"
+         revIDETogglePreference "cREVScriptDebugMode"
+         break
       case "Suppress Messages"
       case "Suppress Errors"
          revIDEToggle tWhich
@@ -3037,10 +3039,16 @@ end revMenubarDevelopmentMenuPick
 on revMenubarViewMenuPick pWhich
    switch pWhich
       case "Show IDE Stacks In Lists"
+         revIDETogglePreference "cShowRevolutionStacks"
+         break
+      case "Backdrop"
+         revIDETogglePreference "cBackDrop"
+         break
+      case "Grid"
+         revIDETogglePreference "cGrid"
+         break
       case "Show Invisible Objects"
       case "Rulers"
-      case "Backdrop"
-      case "Grid"
          revIDEToggle pWhich
          break
       case "Go First"
