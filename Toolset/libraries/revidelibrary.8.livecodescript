@@ -2443,7 +2443,7 @@ Returns (Any): The value of the preference
 on revIDESetPreference pPreferenceName, pValue
    set the pPreferenceName of stack "revpreferences" to pValue
    revInternal__SavePreferences
-   ideMessageSend "idePreferenceChanged:" & pPreferenceName,pValue
+   ideMessageSend "idePreferenceChanged:" & pPreferenceName, pValue
 end revIDESetPreference
 
 /*
@@ -12124,6 +12124,11 @@ private command __EnsurePreferencesInfo
    put __propertyDataFromInfoFile(tIDEPreferencesPath & slash & kPreferencesInfoFilename) \
          into sPreferencesA
    
+   // Special case android JDK as we don't yet have per-platform prefs info
+   if the platform is "linux" then
+      put false into sPreferencesA["cMobileSupport[android.jdk]"]["read_only"]
+   end if
+   
    put __orderPropArray(__organisePropertyInfo(sPreferencesA), \
          revIDEPreferencesSections()) into sPreferencesInfoA
 end __EnsurePreferencesInfo
@@ -12196,8 +12201,14 @@ command revIDEInitialisePreferences
    
    // Find unset prefs
    local tPrefs
-   put the customKeys of stack "revPreferences" into tPrefs
-   split tPrefs by return
+   put the customProperties of stack "revPreferences" into tPrefs
+   
+   // Hack a bit to get customproperties in other sets in the right form
+   repeat for each line tSet in the customPropertySets of stack "revPreferences"
+      repeat for each key tKey in the customProperties[tSet] of stack "revPreferences"
+         put empty into tPrefs[tSet & "[" & tKey & "]"]
+      end repeat
+   end repeat
    
    local tToSet
    put sPreferencesA into tToSet
@@ -12228,14 +12239,12 @@ command revIDEPreferencesResetSection pSection
    __InitialisePreferences tToReset
 end revIDEPreferencesResetSection
 
-on idePreferenceChanged pPreference
+on idePreferenceChanged pPreference, pValue
    -- Ensure assoicated state is updated for relevant preferences
    switch pPreference
       // Preferences governing global properties
       case "cBackDrop"
-         local tValue
-         put revIDEGetPreference(pPreference) into tValue
-         if tValue then
+         if pValue then
             set the backDrop to revIDEGetPreference("cBackDropColor")
          else
             set the backDrop to "none"
@@ -12243,82 +12252,92 @@ on idePreferenceChanged pPreference
          break
       case "cBackDropColor"
          if the backDrop is not "none" then
-            set the backdrop to revIDEGetPreference(pPreference)
+            set the backdrop to pValue
          end if
          break
       case "cGrid"
-         set the grid to revIDEGetPreference(pPreference)
+         set the grid to pValue
          break
       case "cHTTPProxy"
-         set the httpProxy to revIDEGetPreference(pPreference)
+         set the httpProxy to pValue
          break
       case "cSelectGrouped"
-         set the selectGroupedControls to revIDEGetPreference(pPreference)
+         set the selectGroupedControls to pValue
          break
       case "cREVToolTipDelay"
-         set the tooltipDelay to revIDEGetPreference(pPreference)
+         set the tooltipDelay to pValue
          break
       case "cREVScriptFont"
-         set the scriptTextFont to revIDEGetPreference(pPreference)
+         set the scriptTextFont to pValue
          break
       case "cREVScriptSize"
-         set the scriptTextSize to revIDEGetPreference(pPreference)
+         set the scriptTextSize to pValue
          break
       case "cGridSize"
-         set the gridSize to revIDEGetPreference(pPreference)
+         set the gridSize to pValue
          break
       case "cSelectionHandleColor"
-         set the selectionHandleColor to revIDEGetPreference(pPreference)
+         set the selectionHandleColor to pValue
          break
       case "cNavigationArrows"
-         set the navigationArrows to revIDEGetPreference(pPreference)
+         set the navigationArrows to pValue
          break
       case "cGridSize"
-         set the gridSize to revIDEGetPreference(pPreference)
+         set the gridSize to pValue
          break
       case "cTraceDelay"
-         set the traceDelay to revIDEGetPreference(pPreference)
+         set the traceDelay to pValue
          break
          // Preferences governing global variables
       case "idePropertyInspector_labels"
          global gRevLanguageNames
-         put revIDEGetPreference(pPreference) into gRevLanguageNames
+         put pValue into gRevLanguageNames
          break
       case "cRevPopups"
          global gREVPopups
-         put revIDEGetPreference(pPreference) into gREVPopups
+         put pValue into gREVPopups
          break
       case "cAutoFormat"
          global gREVAutoFormat
-         put revIDEGetPreference(pPreference) into gREVAutoFormat
+         put pValue into gREVAutoFormat
          break
       case "cREVUIScriptShortcut"
          global gREVUIScriptShortcut
-         put revIDEGetPreference(pPreference) into gREVUIScriptShortcut
+         put pValue into gREVUIScriptShortcut
          break      
       case "cREVScriptShortcut"
          global gREVScriptShortcut
-         put revIDEGetPreference(pPreference) into gREVScriptShortcut
+         put pValue into gREVScriptShortcut
          break
       case "cCommentCharacter"
          global gREVCommentCharacter
-         put revIDEGetPreference(pPreference) into gREVCommentCharacter
+         put pValue into gREVCommentCharacter
          break
       case "cREVTemplateMasterName"
          global gREVTemplateMasterName
-         put revIDEGetPreference(pPreference) into gREVTemplateMasterName
+         put pValue into gREVTemplateMasterName
          break
       case "cREVAutoCreateProfiles"
          global gREVAutoCreateProfiles
-         put revIDEGetPreference(pPreference) into gREVAutoCreateProfiles
+         put pValue into gREVAutoCreateProfiles
          break
       case "cREVProfileReadOnly"
          global gREVProfileReadOnly
-         put revIDEGetPreference(pPreference) into gREVProfileReadOnly
+         put pValue into gREVProfileReadOnly
          break
       case "cShowRevolutionStacks"
          global gRevShowStacks
-         put revIDEGetPreference(pPreference) into gRevShowStacks
+         put pValue into gRevShowStacks
+         break
+         // Preferences with more complex side-effects
+      case "cMobileSupport[android.sdk]"
+         revIDEDeployAndroidInitialize
+         break
+      case "cMobileSupport[android.jdk]"
+         revIDEDeployAndroidInitialize
+         break
+      case "cMobileSupport[ios.sdks]"
+         revIDEDeployIOSUpdateSDKs
          break
    end switch
 end idePreferenceChanged

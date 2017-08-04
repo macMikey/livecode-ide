@@ -13,6 +13,13 @@ on editorUpdate
    put the editorEnabled of me into tEnabled
    put the editorEffective of me into tEffective
    lock messages
+   if not tEnabled then
+      set the opaque of field 1 of me to false
+      set the showborder of field 1 of me to false
+      set the locktext of field 1 of me to true
+      set the autohilite of field 1 of me to false
+      hide button 1 of me
+   end if
    put tValue into field 1 of me
    set the enabled of field 1 of me to tEnabled
    if tEffective is true then
@@ -26,14 +33,20 @@ end editorUpdate
 
 on editorResize
    lock screen
+   local tEnabled
+   put the editorEnabled of me into tEnabled
    lock messages
    local tLeft,tTop,tRight,tBottom
    put item 1 of the rect of me into tLeft
    put item 2 of the rect of me into tTop
    put item 3 of the rect of me into tRight
    put item 4 of the rect of me into tBottom
-   set the rect of button 1 of me to tRight-the width of button 1 of me, tTop, tRight,tBottom
-   set the rect of field 1 of me to tLeft, tTop, tRight-the width of button 1 of me - sPadding, tBottom
+   if tEnabled then
+      set the rect of button 1 of me to tRight-the width of button 1 of me, tTop, tRight,tBottom
+      set the rect of field 1 of me to tLeft, tTop, tRight-the width of button 1 of me - sPadding, tBottom
+   else
+      set the rect of field 1 of me to the rect of me
+   end if
    unlock messages
    unlock screen
 end editorResize

@@ -22,11 +22,9 @@ on editorUpdate
    if not tEnabled then
       set the backgroundColor of graphic "SDK Status" of me to "gray"
       set the tooltip of graphic "SDK Status" of me to empty
-   else
-      revIDEDeployIOSUpdateSDKs
-      updateSimulators
-      updateSDKs
    end if
+   updateSimulators
+   updateSDKs
    unlock messages
    unlock screen
 end editorUpdate

@@ -55,7 +55,7 @@ cScriptEditor,colorization,scheme	Colorization scheme	Script Editor	com.livecode
 cScriptEditor,editor,backgroundcolor	Background color	Script Editor	com.livecode.pi.color	true	false		white
 cScriptEditor,editor,debugBackgroundcolor	Background color when debugging	Script Editor	com.livecode.pi.color	true	false		white
 cScriptEditor,usetabs	Scripts open in:	Script Editor	com.livecode.pi.enum	true	false		true	New tab|true,New window|false
-cScriptEditor,editor,tabdepth	Number of indentation spaces	Script Editor	com.livecode.pi.integer	true	false		4			0		1
+cScriptEditor,editor,tabdepth	Number of indentation spaces	Script Editor	com.livecode.pi.integer	true	false		3			0		1
 cScriptEditor,preserveVariables	Preserve script local variables across compilation	Script Editor	com.livecode.pi.boolean	true	false
 cScriptEditor,explicitVariables	Error when using undeclared variables	Script Editor	com.livecode.pi.boolean	true	false		false
 cScriptEditor,editor,autoformat	Automatically format scripts	Script Editor	com.livecode.pi.boolean	true	false		true
@@ -99,7 +99,7 @@ cShowVideoclips	Show video clips	Application Browser	com.livecode.pi.boolean	tru
 
 cMobileSupport[ios.sdks]	iOS SDKs	Mobile Support	com.livecode.pi.iossdk	true	false	
 cMobileSupport[android.sdk]	Android SDK	Mobile Support	com.livecode.pi.androidsdk	true	false	
-cMobileSupport[android.jdk]	Android JDK	Mobile Support	com.livecode.pi.folder	true	false	
+cMobileSupport[android.jdk]	Android JDK	Mobile Support	com.livecode.pi.folder	true	true	
 
 cNotifyMeOfBetaReleases	Notify me of beta releases	Updates	com.livecode.pi.boolean	true	false		true	
 cNotifyMeOfDevelopmentReleases	Notify me of development releases	Updates	com.livecode.pi.boolean	true	false		true	

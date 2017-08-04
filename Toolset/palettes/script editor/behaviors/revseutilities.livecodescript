@@ -9,6 +9,19 @@
 #
 ################################################################################
 
+local sInited
+command revSEUtilitiesInitialize
+   if sInited then 
+      exit revSEUtilitiesInitialize
+   end if
+   send "doSubscribe" to this me
+   put true into sInited
+end revSEUtilitiesInitialize
+
+on doSubscribe
+   ideSubscribe "idePreferenceChanged"
+end doSubscribe
+
 on preOpenStack
    set the behavior of stack "revSETemplate" of me to the long id of stack revIDEScriptEditorBehavior("stack")
    send "setBehaviors" to stack "revSETemplate" of me
@@ -339,12 +352,14 @@ end revSERestoreEditors
 #   Sends an update message to each active script editor. This causes the breakpoints and variables panes to update
 #   and will reload the script editor preferences in pPrefsChanged is true.
 command revSEUpdateEditors pPrefsChanged
+   lock screen
    local tEditors
    put revListScriptEditors() into tEditors
    
    repeat for each line tEditor in tEditors
-      send " revSEUpdate pPrefsChanged" to tEditor
+      send "revSEUpdate pPrefsChanged" to tEditor
    end repeat
+   unlock screen
 end revSEUpdateEditors
 
 local sPrefs
@@ -394,6 +409,12 @@ command seSendCallbacks pObject, pScriptEditor
    delete variable sObjectCallbacks[pObject]
 end seSendCallbacks
 
+on idePreferenceChanged pPref, pValue
+   if pPref begins with "cScriptEditor" then
+      put pValue into sPrefs[item 2 to -1 of pPref]
+      --revSEUpdateEditors
+   end if
+end idePreferenceChanged
 
 # Parameters
 #   pTag : the name of the preference setting to get
@@ -431,10 +452,12 @@ end sePrefList
 #   Initialises the script editor preferences system.
 local sPrefsInited
 command sePrefInit pForce
+   revSEUtilitiesInitialize
+   
    if sPrefsInited and not pForce then
       exit sePrefInit
    end if
-   
+      
    # Get the default preferences, which are returned in an array.
    local tPrefs
    sePrefGetDefaults

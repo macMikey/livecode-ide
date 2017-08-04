@@ -15,9 +15,7 @@ on editorUpdate
    put tValue into field "Android SDK" of me
    set the enabled of field "Android SDK" of me to tEnabled
    if not tEnabled then
-      set the enabled of button "ChooseAndroid" of me to false
-   else
-      revIDEDeployAndroidInitialize
+      set the enabled of button "ChooseAndroid" of me to false   
    end if
    unlock messages
    unlock screen
@@ -51,12 +49,19 @@ on editorResize
          the left of me
    set the top of field "Android SDK" of me to \
          the bottom of field "Location Label" of me + kControlGap
+   
+   set the top of button "Clear Android SDK" of me to \
+         the top of field "Android SDK" of me + 2
+   set the right of button "Clear Android SDK" of me to \
+         the right of field "Android SDK" of me
    unlock messages
    unlock screen
 end editorResize
 
 on mouseUp
-   if the short name of the target is "ChooseAndroid" then
+   local tTarget
+   put the short name of the target into tTarget
+   if tTarget is "ChooseAndroid" then
       answer folder "Please choose the location of your Android development SDK"
       if it is not empty then
          if revIDEDeployAndroidIsValidSDK(it) then
@@ -66,5 +71,8 @@ on mouseUp
             answer error "The chosen folder is not a valid Android SDK. Please ensure you have installed it correctly, and enabled support for" && revIDEDeployAndroidRequiredSDK()
          end if
       end if
+   else if tTarget is "Clear Android SDK" then
+      set the editorValue of me to empty
+      updateProperty
    end if
 end mouseUp
